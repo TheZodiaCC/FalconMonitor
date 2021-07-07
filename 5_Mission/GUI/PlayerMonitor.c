@@ -36,7 +36,7 @@ class PlayerMonitor extends UIScriptedMenu
 	
 	override Widget Init() {
 		if (!isInitialized) {
-			widgetRoot = GetGame().GetWorkspace().CreateWidgets("FalconTools/GUI/Layouts/playerMonitor.layout");
+			widgetRoot = GetGame().GetWorkspace().CreateWidgets("FalconMonitor/GUI/Layouts/playerMonitor.layout");
 			widgetRoot.Show(false);
 			
 			HummanityCountText = TextWidget.Cast( widgetRoot.FindAnyWidget("HummanityCountText") );

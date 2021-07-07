@@ -9,41 +9,17 @@ class PlayerMonitorBack
 		GetRPCManager().AddRPC( "Falcon", "setHummanityLevelS", this, SingeplayerExecutionType.Server );
 	}
 	
-	private map<string, int> loadPlayerData(string playerID)
+	private PlayerMonitorHummanityValues loadPlayerData(string playerID)
 	{
-		map<string, int> playerData = new map<string, int>();
-		string playerJson = playersHummanityPath + playerID + ".json";
+		PlayerMonitorHummanityValues playerHummanityData = new PlayerMonitorHummanityValues();
+		string playerJsonPath = playersHummanityPath + playerID + ".json";
 		
-		if (FileExist(playerJson))
+		if (FileExist(playerJsonPath))
 		{
-			JsonFileLoader<map<string, int>>.JsonLoadFile(playerJson, playerData);
+			JsonFileLoader<PlayerMonitorHummanityValues>.JsonLoadFile(playerJsonPath, playerHummanityData);
 		}
 		
-		return playerData;
-	}
-	
-	private string getHummanityLevel(string playerID)
-	{
-		
-		string playerJson = playersHummanityPath + playerID + ".json";
-		
-		if (FileExist(playerJson))
-		{
-			PlayerHummanityValues playerHummanityData = new PlayerHummanityValues();
-			HummanityValues hummanityValuesData = new HummanityValues();
-			
-			JsonFileLoader<PlayerHummanityValues>.JsonLoadFile(playerJson, playerHummanityData);
-			JsonFileLoader<HummanityValues>.JsonLoadFile(hummanityValues, hummanityValuesData);
-			
-			foreach (HummanityLevel level : hummanityValuesData.getHummanityLevels()) {
-				Print(level.getName());
-			}
-			return "Survivor";
-		}
-		else
-		{
-			return "Survivor";
-		}
+		return playerHummanityData;
 	}
 	
 	private void setHummanityS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -55,9 +31,9 @@ class PlayerMonitorBack
         if( type == CallType.Server ) {	
 			string playerID = sender.GetId();
 			
-			map<string, int> playerData = loadPlayerData(playerID);
+			PlayerMonitorHummanityValues playerHummanityData = loadPlayerData(playerID);
 			
-			int hummanity = playerData.Get("hummanity");
+			int hummanity = playerHummanityData.getHummanity();
 			
 			GetRPCManager().SendRPC( "Falcon", "setHummanityC", new Param1<int>(hummanity) );
        	 }
@@ -76,7 +52,9 @@ class PlayerMonitorBack
         if( type == CallType.Server ) {	
 			string playerID = sender.GetId();
 			
-			string hummanityLevel = getHummanityLevel(playerID);
+			PlayerMonitorHummanityValues playerHummanityData = loadPlayerData(playerID);
+			
+			string hummanityLevel = playerHummanityData.getHummanityLevel();
 			
 			GetRPCManager().SendRPC( "Falcon", "setHummanityLevelC", new Param1<string>(hummanityLevel) );
        	 }
