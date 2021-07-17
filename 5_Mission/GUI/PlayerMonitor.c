@@ -4,9 +4,17 @@ class PlayerMonitor extends UIScriptedMenu
 	
 	private bool isInitialized;
     private bool isMenuOpen;
-			
+	
+	private ButtonWidget btnHummanityPanel;
+	
+	private Widget JournalMain;
+	private TextWidget JournalMainText;
+		
+	private Widget HummanityWidget;	
 	private TextWidget HummanityCountText;
 	private TextWidget HummanityLevelCountText;
+	
+	private Widget currentWidget;
 	
 	ref PlayerMonitorBack MonitorBack;
 	
@@ -39,14 +47,21 @@ class PlayerMonitor extends UIScriptedMenu
 			widgetRoot = GetGame().GetWorkspace().CreateWidgets("FalconMonitor/GUI/Layouts/playerMonitor.layout");
 			widgetRoot.Show(false);
 			
-			HummanityCountText = TextWidget.Cast( widgetRoot.FindAnyWidget("HummanityCountText") );
-			HummanityLevelCountText = TextWidget.Cast( widgetRoot.FindAnyWidget("HummanityLevelCountText") );
+			HummanityWidget = Widget.Cast(widgetRoot.FindAnyWidget("HummanityPanel"));
+			HummanityCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("HummanityCountText"));
+			HummanityLevelCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("HummanityLevelCountText"));
+			
+			JournalMain = Widget.Cast(widgetRoot.FindAnyWidget("JournalPanel"));
+			JournalMainText = TextWidget.Cast(widgetRoot.FindAnyWidget("JournalTitleTEXT"));
 		
+			btnHummanityPanel = ButtonWidget.Cast(widgetRoot.FindAnyWidget("HummanityButtonWidget")); 
+			
+			WidgetEventHandler.GetInstance().RegisterOnClick(btnHummanityPanel, this, "openHummanityPanel");
+			
 			isInitialized = true;
 		}
-			
-		setHummanity();
-		setHummanityLevel();
+		
+		initWidgets();
 		
 		return widgetRoot;		
 	}
@@ -66,6 +81,15 @@ class PlayerMonitor extends UIScriptedMenu
         super.OnShow();
         PPEffects.SetBlurMenu(0.5);
     }
+	
+	private void initWidgets() {
+		HummanityWidget.Show(false);
+		currentWidget = JournalMain;
+		
+		JournalMainText.SetText(GetGame().GetPlayer().GetIdentity().GetName());
+		
+		JournalMain.Show(true);
+	}
 	
 	bool isMenuOpened() {
         return isMenuOpen;
@@ -115,6 +139,16 @@ class PlayerMonitor extends UIScriptedMenu
 	
 	void setHummanityLevel() {
 		MonitorBack.setPlayerHummanityLevel();
+	}
+	
+	void openHummanityPanel() {
+		currentWidget.Show(false);
+		
+		setHummanity();
+		setHummanityLevel();
+		
+		HummanityWidget.Show(true);
+		currentWidget = HummanityWidget;
 	}
 }
 	
