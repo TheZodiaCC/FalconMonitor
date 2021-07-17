@@ -6,13 +6,20 @@ class PlayerMonitor extends UIScriptedMenu
     private bool isMenuOpen;
 	
 	private ButtonWidget btnHummanityPanel;
+	private ButtonWidget btnSkillsPanel;
 	
 	private Widget JournalMain;
 	private TextWidget JournalMainText;
+	
+	private Widget SkillsWidget;
 		
 	private Widget HummanityWidget;	
 	private TextWidget HummanityCountText;
 	private TextWidget HummanityLevelCountText;
+	private TextWidget KilledSurvivorsCountText;
+	private TextWidget KilledHeroesCountText;
+	private TextWidget KilledBanditsCountText;
+	private TextWidget KilledZombiesCountText;
 	
 	private Widget currentWidget;
 	
@@ -50,13 +57,21 @@ class PlayerMonitor extends UIScriptedMenu
 			HummanityWidget = Widget.Cast(widgetRoot.FindAnyWidget("HummanityPanel"));
 			HummanityCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("HummanityCountText"));
 			HummanityLevelCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("HummanityLevelCountText"));
+			KilledSurvivorsCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("KilledSurvivorsCountText"));
+			KilledHeroesCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("KilledHeroesCountText"));
+			KilledBanditsCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("KilledBanditsCountText"));
+			KilledZombiesCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("KilledZombiesCountText"));
 			
 			JournalMain = Widget.Cast(widgetRoot.FindAnyWidget("JournalPanel"));
 			JournalMainText = TextWidget.Cast(widgetRoot.FindAnyWidget("JournalTitleTEXT"));
+			
+			SkillsWidget = Widget.Cast(widgetRoot.FindAnyWidget("SkillsPanel"));
 		
 			btnHummanityPanel = ButtonWidget.Cast(widgetRoot.FindAnyWidget("HummanityButtonWidget")); 
+			btnSkillsPanel = ButtonWidget.Cast(widgetRoot.FindAnyWidget("SkillsButtonWidget"));
 			
 			WidgetEventHandler.GetInstance().RegisterOnClick(btnHummanityPanel, this, "openHummanityPanel");
+			WidgetEventHandler.GetInstance().RegisterOnClick(btnSkillsPanel, this, "openSkillsPanel");
 			
 			isInitialized = true;
 		}
@@ -84,6 +99,7 @@ class PlayerMonitor extends UIScriptedMenu
 	
 	private void initWidgets() {
 		HummanityWidget.Show(false);
+		SkillsWidget.Show(false);
 		currentWidget = JournalMain;
 		
 		JournalMainText.SetText(GetGame().GetPlayer().GetIdentity().GetName());
@@ -149,6 +165,13 @@ class PlayerMonitor extends UIScriptedMenu
 		
 		HummanityWidget.Show(true);
 		currentWidget = HummanityWidget;
+	}
+	
+	void openSkillsPanel() {
+		currentWidget.Show(false);
+		
+		SkillsWidget.Show(true);
+		currentWidget = SkillsWidget;
 	}
 }
 	

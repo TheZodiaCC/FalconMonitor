@@ -36,70 +36,163 @@ FrameWidgetClass rootFrame {
      "text valign" center
     }
     PanelWidgetClass HummanityPanel {
-     visible 0
+     visible 1
      ignorepointer 1
-     position 88.1522 88.16339
+     position 88.1522 88.16329
      size 573.02899 648.37701
      hexactpos 1
      vexactpos 1
      hexactsize 1
      vexactsize 1
      {
-      TextWidgetClass HummanityTitleText {
+      TextWidgetClass HummanityWidgetTitleTEXT {
        ignorepointer 1
-       position 0.00005 12.5948
-       size 289.67801 62.9738
+       position 155.845 12.5948
+       size 261.34 48
        hexactpos 1
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       fixaspect inside
        text "Hummanity"
-       "size to text h" 0
-       "size to text v" 0
        "text halign" center
        "text valign" center
       }
-      TextWidgetClass HummanityCountText {
+      TextWidgetClass HummanityTitleText {
        ignorepointer 1
-       position 286.51501 12.5948
-       size 289.67801 62.9738
+       position 12.5947 73.18951
+       size 237.817 52.7575
        hexactpos 1
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       fixaspect inside
-       "size to text h" 0
-       "size to text v" 0
-       "text halign" center
+       text "Hummanity"
        "text valign" center
       }
       TextWidgetClass HummanityLevelText {
        ignorepointer 1
-       position 1.55377 77.00539
-       size 283.67999 62.9738
+       position 14.1784 138.54199
+       size 239.3 50.3788
        hexactpos 1
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       fixaspect inside
-       text "Level"
-       "size to text h" 0
-       "size to text v" 0
+       text "Lvl."
+       "text valign" center
+      }
+      TextWidgetClass HummanityCountText {
+       ignorepointer 1
+       position 266.073 75.568
+       size 289.67999 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
        "text halign" center
        "text valign" center
       }
       TextWidgetClass HummanityLevelCountText {
        ignorepointer 1
-       position 286.51501 77.159
-       size 289.67801 62.9738
+       position 266.073 138.54199
+       size 289.67999 50.3788
        hexactpos 1
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       fixaspect inside
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass KilledSurvivorsTitleText {
+       ignorepointer 1
+       position 14.1784 201.51599
+       size 237.817 52.7575
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       scaled 1
+       text "Killed Survivors"
+       text_proportion 0.8
        "size to text h" 0
        "size to text v" 0
+       "text valign" center
+      }
+      TextWidgetClass KilledHeroesTitleText {
+       ignorepointer 1
+       position 14.1784 264.48898
+       size 237.817 52.7575
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Killed Heroes"
+       text_proportion 0.8
+       "text valign" center
+      }
+      TextWidgetClass KilledBanditsTitleText {
+       ignorepointer 1
+       position 14.1784 327.46298
+       size 237.817 52.7575
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Killed Bandits"
+       text_proportion 0.8
+       "text valign" center
+      }
+      TextWidgetClass KilledZombiesTitleText {
+       ignorepointer 1
+       position 14.1784 390.43698
+       size 237.817 52.7575
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Killed Zombies"
+       text_proportion 0.8
+       "text valign" center
+      }
+      TextWidgetClass KilledSurvivorsCountText {
+       ignorepointer 1
+       position 266.073 201.51599
+       size 289.67999 50.3788
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass KilledHeroesCountText {
+       ignorepointer 1
+       position 266.073 264.48898
+       size 289.67999 50.3788
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass KilledBanditsCountText {
+       ignorepointer 1
+       position 266.073 327.46298
+       size 289.67999 50.3788
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass KilledZombiesCountText {
+       ignorepointer 1
+       position 266.073 390.43698
+       size 289.67999 50.3788
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
        "text halign" center
        "text valign" center
       }
@@ -128,7 +221,7 @@ FrameWidgetClass rootFrame {
      text "S"
     }
     PanelWidgetClass JournalPanel {
-     visible 1
+     visible 0
      ignorepointer 1
      position 88.1522 88.16339
      size 573.02899 648.37701
@@ -145,6 +238,30 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 1
        vexactsize 1
+       "text halign" center
+       "text valign" center
+      }
+     }
+    }
+    PanelWidgetClass SkillsPanel {
+     visible 0
+     ignorepointer 1
+     position 88.1522 88.16339
+     size 573.02899 648.37701
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      TextWidgetClass SkillsWidgetTitleTEXT {
+       ignorepointer 1
+       position 151.63101 12.5948
+       size 269.76801 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Skills"
        "text halign" center
        "text valign" center
       }
