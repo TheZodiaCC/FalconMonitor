@@ -16,9 +16,7 @@ class PlayerMonitor extends UIScriptedMenu
 	private Widget HummanityWidget;	
 	private TextWidget HummanityCountText;
 	private TextWidget HummanityLevelCountText;
-	private TextWidget KilledSurvivorsCountText;
-	private TextWidget KilledHeroesCountText;
-	private TextWidget KilledBanditsCountText;
+	private TextWidget KilledPlayersCountText;
 	private TextWidget KilledZombiesCountText;
 	
 	private Widget currentWidget;
@@ -31,6 +29,8 @@ class PlayerMonitor extends UIScriptedMenu
 		
 		GetRPCManager().AddRPC( "Falcon", "setHummanityC", this, SingeplayerExecutionType.Server );
 		GetRPCManager().AddRPC( "Falcon", "setHummanityLevelC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "Falcon", "setKilledPlayersC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "Falcon", "setKilledZombiesC", this, SingeplayerExecutionType.Server );
 	}
 	
 	//Deconstructor
@@ -57,9 +57,7 @@ class PlayerMonitor extends UIScriptedMenu
 			HummanityWidget = Widget.Cast(widgetRoot.FindAnyWidget("HummanityPanel"));
 			HummanityCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("HummanityCountText"));
 			HummanityLevelCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("HummanityLevelCountText"));
-			KilledSurvivorsCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("KilledSurvivorsCountText"));
-			KilledHeroesCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("KilledHeroesCountText"));
-			KilledBanditsCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("KilledBanditsCountText"));
+			KilledPlayersCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("KilledPlayersCountText"));
 			KilledZombiesCountText = TextWidget.Cast(widgetRoot.FindAnyWidget("KilledZombiesCountText"));
 			
 			JournalMain = Widget.Cast(widgetRoot.FindAnyWidget("JournalPanel"));
@@ -157,11 +155,51 @@ class PlayerMonitor extends UIScriptedMenu
 		MonitorBack.setPlayerHummanityLevel();
 	}
 	
+	void setKilledPlayersC(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target) {
+		
+		Param1<string> data;
+        if ( !ctx.Read(data)) return;
+		
+		if (type == CallType.Client)
+        {
+			if (data.param1)
+			{
+				string killedPlayers = data.param1;
+				KilledPlayersCountText.SetText(killedPlayers);
+			}
+		}
+	}
+	
+	void setKilledPlayers() {
+		MonitorBack.setKilledPlayers();
+	}
+	
+	void setKilledZombiesC(CallType type, ParamsReadContext ctx, PlayerIdentity sender, Object target) {
+		
+		Param1<string> data;
+        if ( !ctx.Read(data)) return;
+		
+		if (type == CallType.Client)
+        {
+			if (data.param1)
+			{
+				string killedZombies = data.param1;
+				KilledZombiesCountText.SetText(killedZombies);
+			}
+		}
+	}
+	
+	void setKilledZombies() {
+		MonitorBack.setKilledZombies();
+	}
+	
 	void openHummanityPanel() {
 		currentWidget.Show(false);
 		
 		setHummanity();
 		setHummanityLevel();
+		setKilledPlayers();
+		setKilledZombies();
 		
 		HummanityWidget.Show(true);
 		currentWidget = HummanityWidget;

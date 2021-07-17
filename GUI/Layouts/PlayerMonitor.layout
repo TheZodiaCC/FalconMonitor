@@ -101,7 +101,7 @@ FrameWidgetClass rootFrame {
        "text halign" center
        "text valign" center
       }
-      TextWidgetClass KilledSurvivorsTitleText {
+      TextWidgetClass KilledPlayersTitleText {
        ignorepointer 1
        position 14.1784 201.51599
        size 237.817 52.7575
@@ -110,39 +110,15 @@ FrameWidgetClass rootFrame {
        hexactsize 1
        vexactsize 1
        scaled 1
-       text "Killed Survivors"
+       text "Killed Players"
        text_proportion 0.8
        "size to text h" 0
        "size to text v" 0
        "text valign" center
       }
-      TextWidgetClass KilledHeroesTitleText {
-       ignorepointer 1
-       position 14.1784 264.48898
-       size 237.817 52.7575
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       text "Killed Heroes"
-       text_proportion 0.8
-       "text valign" center
-      }
-      TextWidgetClass KilledBanditsTitleText {
-       ignorepointer 1
-       position 14.1784 327.46298
-       size 237.817 52.7575
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       text "Killed Bandits"
-       text_proportion 0.8
-       "text valign" center
-      }
       TextWidgetClass KilledZombiesTitleText {
        ignorepointer 1
-       position 14.1784 390.43698
+       position 14.1784 264.48898
        size 237.817 52.7575
        hexactpos 1
        vexactpos 1
@@ -152,7 +128,7 @@ FrameWidgetClass rootFrame {
        text_proportion 0.8
        "text valign" center
       }
-      TextWidgetClass KilledSurvivorsCountText {
+      TextWidgetClass KilledPlayersCountText {
        ignorepointer 1
        position 266.073 201.51599
        size 289.67999 50.3788
@@ -163,31 +139,9 @@ FrameWidgetClass rootFrame {
        "text halign" center
        "text valign" center
       }
-      TextWidgetClass KilledHeroesCountText {
-       ignorepointer 1
-       position 266.073 264.48898
-       size 289.67999 50.3788
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       "text halign" center
-       "text valign" center
-      }
-      TextWidgetClass KilledBanditsCountText {
-       ignorepointer 1
-       position 266.073 327.46298
-       size 289.67999 50.3788
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       "text halign" center
-       "text valign" center
-      }
       TextWidgetClass KilledZombiesCountText {
        ignorepointer 1
-       position 266.073 390.43698
+       position 266.073 264.48898
        size 289.67999 50.3788
        hexactpos 1
        vexactpos 1
