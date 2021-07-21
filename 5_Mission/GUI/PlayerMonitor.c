@@ -27,10 +27,10 @@ class PlayerMonitor extends UIScriptedMenu
 	void PlayerMonitor() {		
 		MonitorBack = new ref PlayerMonitorBack();
 		
-		GetRPCManager().AddRPC( "Falcon", "setHummanityC", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "setHummanityLevelC", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "setKilledPlayersC", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "setKilledZombiesC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconMonitor", "setHummanityC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconMonitor", "setHummanityLevelC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconMonitor", "setKilledPlayersC", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconMonitor", "setKilledZombiesC", this, SingeplayerExecutionType.Server );
 	}
 	
 	//Deconstructor

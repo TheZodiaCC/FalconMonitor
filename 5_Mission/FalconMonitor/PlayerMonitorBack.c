@@ -5,10 +5,10 @@ class PlayerMonitorBack
 	
 	void PlayerMonitorBack()
 	{
-		GetRPCManager().AddRPC( "Falcon", "setHummanityS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "setHummanityLevelS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "setKilledPlayersS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "Falcon", "setKilledZombiesS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconMonitor", "setHummanityS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconMonitor", "setHummanityLevelS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconMonitor", "setKilledPlayersS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconMonitor", "setKilledZombiesS", this, SingeplayerExecutionType.Server );
 	}
 	
 	private PlayerMonitorHummanityValues loadPlayerData(string playerID)
@@ -37,12 +37,12 @@ class PlayerMonitorBack
 			
 			int hummanity = playerHummanityData.getHummanity();
 			
-			GetRPCManager().SendRPC( "Falcon", "setHummanityC", new Param1<int>(hummanity) );
+			GetRPCManager().SendRPC( "FalconMonitor", "setHummanityC", new Param1<int>(hummanity) );
        	 }
     }
 	
 	void setPlayerHummanity() {		
-		GetRPCManager().SendRPC( "Falcon", "setHummanityS", new Param1<string>("") );
+		GetRPCManager().SendRPC( "FalconMonitor", "setHummanityS", new Param1<string>("") );
 	}
 	
 	private void setHummanityLevelS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -58,12 +58,12 @@ class PlayerMonitorBack
 			
 			string hummanityLevel = playerHummanityData.getHummanityLevel();
 			
-			GetRPCManager().SendRPC( "Falcon", "setHummanityLevelC", new Param1<string>(hummanityLevel) );
+			GetRPCManager().SendRPC( "FalconMonitor", "setHummanityLevelC", new Param1<string>(hummanityLevel) );
        	 }
     }
 	
 	void setPlayerHummanityLevel() {		
-		GetRPCManager().SendRPC( "Falcon", "setHummanityLevelS", new Param1<string>("") );
+		GetRPCManager().SendRPC( "FalconMonitor", "setHummanityLevelS", new Param1<string>("") );
 	}
 	
 	private void setKilledPlayersS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -79,12 +79,12 @@ class PlayerMonitorBack
 			
 			string killedPlayers = playerHummanityData.getKilledPlayers().ToString();
 			
-			GetRPCManager().SendRPC( "Falcon", "setKilledPlayersC", new Param1<string>(killedPlayers) );
+			GetRPCManager().SendRPC( "FalconMonitor", "setKilledPlayersC", new Param1<string>(killedPlayers) );
        	 }
     }
 	
 	void setKilledPlayers() {		
-		GetRPCManager().SendRPC( "Falcon", "setKilledPlayersS", new Param1<string>("") );
+		GetRPCManager().SendRPC( "FalconMonitor", "setKilledPlayersS", new Param1<string>("") );
 	}
 	
 	private void setKilledZombiesS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -100,11 +100,11 @@ class PlayerMonitorBack
 			
 			string killedZombies = playerHummanityData.getKilledZeds().ToString();
 			
-			GetRPCManager().SendRPC( "Falcon", "setKilledZombiesC", new Param1<string>(killedZombies) );
+			GetRPCManager().SendRPC( "FalconMonitor", "setKilledZombiesC", new Param1<string>(killedZombies) );
        	 }
     }
 	
 	void setKilledZombies() {		
-		GetRPCManager().SendRPC( "Falcon", "setKilledZombiesS", new Param1<string>("") );
+		GetRPCManager().SendRPC( "FalconMonitor", "setKilledZombiesS", new Param1<string>("") );
 	}
 }
