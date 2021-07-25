@@ -83,16 +83,14 @@ class PlayerMonitor extends UIScriptedMenu
 		super.OnHide();
         PPEffects.SetBlurMenu(0);
 
-        g_Game.GetUIManager().ShowCursor(true);
-        g_Game.GetUIManager().ShowUICursor(false);
-        GetGame().GetInput().ResetGameFocus();
-        GetGame().GetMission().PlayerControlEnable(false);
-        GetGame().GetMission().GetHud().Show( true );
+        unlockControls();
 	}
 	
 	override void OnShow() {
         super.OnShow();
         PPEffects.SetBlurMenu(0.5);
+		
+		lockControls();
     }
 	
 	private void initWidgets() {
@@ -211,6 +209,21 @@ class PlayerMonitor extends UIScriptedMenu
 		SkillsWidget.Show(true);
 		currentWidget = SkillsWidget;
 	}
+	
+	private void lockControls()
+    {
+        GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_ALL);
+        GetGame().GetUIManager().ShowUICursor( true );
+        GetGame().GetMission().GetHud().Show( false );
+    }
+
+    private void unlockControls()
+    {
+        GetGame().GetMission().PlayerControlEnable(false);
+        GetGame().GetInput().ResetGameFocus();
+        GetGame().GetUIManager().ShowUICursor( false );
+        GetGame().GetMission().GetHud().Show( true );
+    }
 }
 	
 	
