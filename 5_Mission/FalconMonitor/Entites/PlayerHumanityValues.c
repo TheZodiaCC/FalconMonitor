@@ -1,10 +1,10 @@
-class PlayerMonitorHummanityValues
+class PlayerMonitorHumanityValues
 {
 	private int killedPlayers;
 	private int killedZeds;
-	private int hummanity;
+	private int humanity;
 	private int deaths;
-	private string hummanityLevel;
+	private string humanityLevel;
 	
 	int getKilledPlayers() {
 		return killedPlayers;
@@ -14,15 +14,15 @@ class PlayerMonitorHummanityValues
 		return killedZeds;
 	}
 	
-	int getHummanity() {
-		return hummanity;
+	int getHumanity() {
+		return humanity;
 	}
 	
 	int getDeaths() {
 		return deaths;
 	}
 	
-	string getHummanityLevel() {
-		return hummanityLevel;
+	string getHumanityLevel() {
+		return humanityLevel;
 	}
 }

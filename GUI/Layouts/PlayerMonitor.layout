@@ -1,5 +1,5 @@
 FrameWidgetClass rootFrame {
- position -0.00663 -0.01166
+ position 0 0
  size 1 1
  halign center_ref
  valign center_ref
@@ -35,7 +35,7 @@ FrameWidgetClass rootFrame {
      "text halign" center
      "text valign" center
     }
-    PanelWidgetClass HummanityPanel {
+    PanelWidgetClass HumanityPanel {
      visible 1
      ignorepointer 1
      position 88.1522 88.16329
@@ -45,7 +45,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      {
-      TextWidgetClass HummanityWidgetTitleTEXT {
+      TextWidgetClass HumanityWidgetTitleTEXT {
        ignorepointer 1
        position 155.845 12.5948
        size 261.34 48
@@ -53,11 +53,11 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       text "Hummanity"
+       text "Humanity"
        "text halign" center
        "text valign" center
       }
-      TextWidgetClass HummanityTitleText {
+      TextWidgetClass HumanityTitleText {
        ignorepointer 1
        position 12.5947 73.18951
        size 237.817 52.7575
@@ -65,10 +65,10 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       text "Hummanity"
+       text "Humanity"
        "text valign" center
       }
-      TextWidgetClass HummanityLevelText {
+      TextWidgetClass HumanityLevelText {
        ignorepointer 1
        position 14.1784 138.54199
        size 239.3 50.3788
@@ -79,7 +79,7 @@ FrameWidgetClass rootFrame {
        text "Lvl."
        "text valign" center
       }
-      TextWidgetClass HummanityCountText {
+      TextWidgetClass HumanityCountText {
        ignorepointer 1
        position 266.073 75.568
        size 289.67999 50.379
@@ -90,7 +90,7 @@ FrameWidgetClass rootFrame {
        "text halign" center
        "text valign" center
       }
-      TextWidgetClass HummanityLevelCountText {
+      TextWidgetClass HumanityLevelCountText {
        ignorepointer 1
        position 266.073 138.54199
        size 289.67999 50.3788
@@ -152,7 +152,7 @@ FrameWidgetClass rootFrame {
       }
      }
     }
-    ButtonWidgetClass HummanityButtonWidget {
+    ButtonWidgetClass HumanityButtonWidget {
      position 12.5947 88.16329
      size 48 140.886
      hexactpos 1
@@ -217,6 +217,75 @@ FrameWidgetClass rootFrame {
        vexactsize 1
        text "Skills"
        "text halign" center
+       "text valign" center
+      }
+      TextWidgetClass MechanicSkillTitleText {
+       ignorepointer 1
+       position 18.1791 77.19309
+       size 237.817 52.7575
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Mechanic Skill:"
+       text_proportion 0.8
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass MechanicSkillText {
+       ignorepointer 1
+       position 284.42599 77.2689
+       size 289.67999 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       "text valign" center
+      }
+      TextWidgetClass MedicalSkillTitleText {
+       ignorepointer 1
+       position 18.1791 140.536
+       size 237.817 52.7575
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Medical Skill:"
+       text_proportion 0.8
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass BuildingSkillTitleText {
+       ignorepointer 1
+       position 18.1791 203.87901
+       size 237.817 52.7575
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text "Building Skill:"
+       text_proportion 0.8
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass MedicalSkillText {
+       ignorepointer 1
+       position 284.42599 140.612
+       size 289.67999 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       "text valign" center
+      }
+      TextWidgetClass BuildingSkillText {
+       ignorepointer 1
+       position 284.42599 203.955
+       size 289.67999 50.379
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
        "text valign" center
       }
      }

@@ -1,30 +1,42 @@
 class PlayerMonitorBack
 {
-	const private string playersHummanityPath = "$profile:/FH/";
-	const static string hummanityValues = "$profile:/FValues/FHvalues.json";
+	const private string playersHumanityPath = "$profile:/FH/";
+	const private string playersSkillsPath = "$profile:/FS/";
+	const static string humanityValues = "$profile:/FValues/FHvalues.json";
 	
 	void PlayerMonitorBack()
 	{
-		GetRPCManager().AddRPC( "FalconMonitor", "setHummanityS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "FalconMonitor", "setHummanityLevelS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "FalconMonitor", "setKilledPlayersS", this, SingeplayerExecutionType.Server );
-		GetRPCManager().AddRPC( "FalconMonitor", "setKilledZombiesS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconMonitor", "setPlayerHumnityS", this, SingeplayerExecutionType.Server );
+		GetRPCManager().AddRPC( "FalconMonitor", "setPlayerSkillsS", this, SingeplayerExecutionType.Server );
 	}
 	
-	private PlayerMonitorHummanityValues loadPlayerData(string playerID)
+	private PlayerMonitorHumanityValues loadPlayerData(string playerID)
 	{
-		PlayerMonitorHummanityValues playerHummanityData = new PlayerMonitorHummanityValues();
-		string playerJsonPath = playersHummanityPath + playerID + ".json";
+		PlayerMonitorHumanityValues playerHumanityData = new PlayerMonitorHumanityValues();
+		string playerJsonPath = playersHumanityPath + playerID + ".json";
 		
 		if (FileExist(playerJsonPath))
 		{
-			JsonFileLoader<PlayerMonitorHummanityValues>.JsonLoadFile(playerJsonPath, playerHummanityData);
+			JsonFileLoader<PlayerMonitorHumanityValues>.JsonLoadFile(playerJsonPath, playerHumanityData);
 		}
 		
-		return playerHummanityData;
+		return playerHumanityData;
 	}
 	
-	private void setHummanityS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
+	private array<string> loadPlayerSkillsData(string playerID)
+	{
+		array<string>  playerSkills = new array<string>();
+		string playerJsonPath = playersSkillsPath + playerID + ".json";
+		
+		if (FileExist(playerJsonPath))
+		{
+			JsonFileLoader<array<string>>.JsonLoadFile(playerJsonPath, playerSkills);
+		}
+		
+		return playerSkills;
+	}
+	
+	private void setPlayerHumnityS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
     {
         Param1<string> data;
 		
@@ -33,78 +45,40 @@ class PlayerMonitorBack
         if( type == CallType.Server ) {	
 			string playerID = sender.GetId();
 			
-			PlayerMonitorHummanityValues playerHummanityData = loadPlayerData(playerID);
+			PlayerMonitorHumanityValues playerHumanityData = loadPlayerData(playerID);
 			
-			int hummanity = playerHummanityData.getHummanity();
+			int humanity = playerHumanityData.getHumanity();
+			string humanityLevel = playerHumanityData.getHumanityLevel();
+			string killedPlayers = playerHumanityData.getKilledPlayers().ToString();
+			string killedZombies = playerHumanityData.getKilledZeds().ToString();
 			
-			GetRPCManager().SendRPC( "FalconMonitor", "setHummanityC", new Param1<int>(hummanity) );
+			PlayerHumanityPackage playerHumnityPackage = new PlayerHumanityPackage(humanity, humanityLevel, killedPlayers, killedZombies);
+			
+			GetRPCManager().SendRPC( "FalconMonitor", "setPlayerHumnityC", new Param1<PlayerHumanityPackage>(playerHumnityPackage), true, sender );
        	 }
     }
 	
-	void setPlayerHummanity() {		
-		GetRPCManager().SendRPC( "FalconMonitor", "setHummanityS", new Param1<string>("") );
+	void setPlayerHumanity() {		
+		GetRPCManager().SendRPC( "FalconMonitor", "setPlayerHumnityS", new Param1<string>("") );
 	}
 	
-	private void setHummanityLevelS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
-    {
-        Param1<string> data;
+	private void setPlayerSkillsS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
+	{
+		Param1<string> data;
 		
         if ( !ctx.Read( data ) ) return;
         
         if( type == CallType.Server ) {	
 			string playerID = sender.GetId();
 			
-			PlayerMonitorHummanityValues playerHummanityData = loadPlayerData(playerID);
+			array<string> playerSkillsData = new array<string>();
+			playerSkillsData = loadPlayerSkillsData(playerID);
 			
-			string hummanityLevel = playerHummanityData.getHummanityLevel();
-			
-			GetRPCManager().SendRPC( "FalconMonitor", "setHummanityLevelC", new Param1<string>(hummanityLevel) );
+			GetRPCManager().SendRPC( "FalconMonitor", "setPlayerSkillsC", new Param1<array<string>>(playerSkillsData), true, sender );
        	 }
-    }
-	
-	void setPlayerHummanityLevel() {		
-		GetRPCManager().SendRPC( "FalconMonitor", "setHummanityLevelS", new Param1<string>("") );
 	}
 	
-	private void setKilledPlayersS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
-    {
-        Param1<string> data;
-		
-        if ( !ctx.Read( data ) ) return;
-        
-        if( type == CallType.Server ) {	
-			string playerID = sender.GetId();
-			
-			PlayerMonitorHummanityValues playerHummanityData = loadPlayerData(playerID);
-			
-			string killedPlayers = playerHummanityData.getKilledPlayers().ToString();
-			
-			GetRPCManager().SendRPC( "FalconMonitor", "setKilledPlayersC", new Param1<string>(killedPlayers) );
-       	 }
-    }
-	
-	void setKilledPlayers() {		
-		GetRPCManager().SendRPC( "FalconMonitor", "setKilledPlayersS", new Param1<string>("") );
-	}
-	
-	private void setKilledZombiesS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
-    {
-        Param1<string> data;
-		
-        if ( !ctx.Read( data ) ) return;
-        
-        if( type == CallType.Server ) {	
-			string playerID = sender.GetId();
-			
-			PlayerMonitorHummanityValues playerHummanityData = loadPlayerData(playerID);
-			
-			string killedZombies = playerHummanityData.getKilledZeds().ToString();
-			
-			GetRPCManager().SendRPC( "FalconMonitor", "setKilledZombiesC", new Param1<string>(killedZombies) );
-       	 }
-    }
-	
-	void setKilledZombies() {		
-		GetRPCManager().SendRPC( "FalconMonitor", "setKilledZombiesS", new Param1<string>("") );
+	void setPlayerSkills() {		
+		GetRPCManager().SendRPC( "FalconMonitor", "setPlayerSkillsS", new Param1<string>("") );
 	}
 }
