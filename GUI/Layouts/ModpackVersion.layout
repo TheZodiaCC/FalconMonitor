@@ -14,7 +14,7 @@ FrameWidgetClass rootFrame {
    vexactpos 1
    hexactsize 1
    vexactsize 1
-   text "FalconIslands POC"
+   text "FalconIslands PoC"
    text_proportion 0.7
    "size to text h" 1
    "size to text v" 1

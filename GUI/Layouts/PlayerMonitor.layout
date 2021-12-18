@@ -30,13 +30,14 @@ FrameWidgetClass rootFrame {
      vexactsize 1
      fixaspect inside
      text "Journal"
+     "exact text" 1
      "size to text h" 0
      "size to text v" 0
      "text halign" center
      "text valign" center
     }
     PanelWidgetClass HumanityPanel {
-     visible 1
+     visible 0
      ignorepointer 1
      position 88.1522 88.16329
      size 573.02899 648.37701
@@ -54,6 +55,7 @@ FrameWidgetClass rootFrame {
        hexactsize 1
        vexactsize 1
        text "Humanity"
+       "exact text" 1
        "text halign" center
        "text valign" center
       }
@@ -66,6 +68,7 @@ FrameWidgetClass rootFrame {
        hexactsize 1
        vexactsize 1
        text "Humanity"
+       "exact text" 1
        "text valign" center
       }
       TextWidgetClass HumanityLevelText {
@@ -77,6 +80,7 @@ FrameWidgetClass rootFrame {
        hexactsize 1
        vexactsize 1
        text "Lvl."
+       "exact text" 1
        "text valign" center
       }
       TextWidgetClass HumanityCountText {
@@ -87,6 +91,7 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 1
        vexactsize 1
+       "exact text" 1
        "text halign" center
        "text valign" center
       }
@@ -98,6 +103,7 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 1
        vexactsize 1
+       "exact text" 1
        "text halign" center
        "text valign" center
       }
@@ -111,6 +117,7 @@ FrameWidgetClass rootFrame {
        vexactsize 1
        scaled 1
        text "Killed Players"
+       "exact text" 1
        text_proportion 0.8
        "size to text h" 0
        "size to text v" 0
@@ -125,6 +132,7 @@ FrameWidgetClass rootFrame {
        hexactsize 1
        vexactsize 1
        text "Killed Zombies"
+       "exact text" 1
        text_proportion 0.8
        "text valign" center
       }
@@ -136,6 +144,7 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 1
        vexactsize 1
+       "exact text" 1
        "text halign" center
        "text valign" center
       }
@@ -147,6 +156,7 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 1
        vexactsize 1
+       "exact text" 1
        "text halign" center
        "text valign" center
       }
@@ -160,6 +170,7 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      scaled 1
+     style MenuDefault
      "no focus" 0
      text "H"
     }
@@ -171,11 +182,12 @@ FrameWidgetClass rootFrame {
      hexactsize 1
      vexactsize 1
      scaled 1
+     style MenuDefault
      "no focus" 0
      text "S"
     }
     PanelWidgetClass JournalPanel {
-     visible 0
+     visible 1
      ignorepointer 1
      position 88.1522 88.16339
      size 573.02899 648.37701
@@ -185,6 +197,7 @@ FrameWidgetClass rootFrame {
      vexactsize 1
      {
       TextWidgetClass JournalTitleTEXT {
+       visible 1
        ignorepointer 1
        position 26.7731 176.326
        size 528.98004 62.9735
@@ -192,6 +205,8 @@ FrameWidgetClass rootFrame {
        vexactpos 1
        hexactsize 1
        vexactsize 1
+       text "Journal"
+       "exact text" 1
        "text halign" center
        "text valign" center
       }
@@ -219,74 +234,15 @@ FrameWidgetClass rootFrame {
        "text halign" center
        "text valign" center
       }
-      TextWidgetClass MechanicSkillTitleText {
-       ignorepointer 1
-       position 18.1791 77.19309
-       size 237.817 52.7575
+      TextListboxWidgetClass SkillsLIST {
+       position 12.5948 75.5686
+       size 547.83899 560.21405
        hexactpos 1
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       text "Mechanic Skill:"
-       text_proportion 0.8
-       "text halign" right
-       "text valign" center
-      }
-      TextWidgetClass MechanicSkillText {
-       ignorepointer 1
-       position 284.42599 77.2689
-       size 289.67999 50.379
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       "text valign" center
-      }
-      TextWidgetClass MedicalSkillTitleText {
-       ignorepointer 1
-       position 18.1791 140.536
-       size 237.817 52.7575
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       text "Medical Skill:"
-       text_proportion 0.8
-       "text halign" right
-       "text valign" center
-      }
-      TextWidgetClass BuildingSkillTitleText {
-       ignorepointer 1
-       position 18.1791 203.87901
-       size 237.817 52.7575
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       text "Building Skill:"
-       text_proportion 0.8
-       "text halign" right
-       "text valign" center
-      }
-      TextWidgetClass MedicalSkillText {
-       ignorepointer 1
-       position 284.42599 140.612
-       size 289.67999 50.379
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       "text valign" center
-      }
-      TextWidgetClass BuildingSkillText {
-       ignorepointer 1
-       position 284.42599 203.955
-       size 289.67999 50.379
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       "text valign" center
+       colums ""
+       lines 12
       }
      }
     }

@@ -1,39 +1,9 @@
 class PlayerMonitorBack
-{
-	const private string playersHumanityPath = "$profile:/FH/";
-	const private string playersSkillsPath = "$profile:/FS/";
-	const static string humanityValues = "$profile:/FValues/FHvalues.json";
-	
+{	
 	void PlayerMonitorBack()
 	{
 		GetRPCManager().AddRPC( "FalconMonitor", "setPlayerHumnityS", this, SingeplayerExecutionType.Server );
 		GetRPCManager().AddRPC( "FalconMonitor", "setPlayerSkillsS", this, SingeplayerExecutionType.Server );
-	}
-	
-	private PlayerMonitorHumanityValues loadPlayerData(string playerID)
-	{
-		PlayerMonitorHumanityValues playerHumanityData = new PlayerMonitorHumanityValues();
-		string playerJsonPath = playersHumanityPath + playerID + ".json";
-		
-		if (FileExist(playerJsonPath))
-		{
-			JsonFileLoader<PlayerMonitorHumanityValues>.JsonLoadFile(playerJsonPath, playerHumanityData);
-		}
-		
-		return playerHumanityData;
-	}
-	
-	private array<string> loadPlayerSkillsData(string playerID)
-	{
-		array<string>  playerSkills = new array<string>();
-		string playerJsonPath = playersSkillsPath + playerID + ".json";
-		
-		if (FileExist(playerJsonPath))
-		{
-			JsonFileLoader<array<string>>.JsonLoadFile(playerJsonPath, playerSkills);
-		}
-		
-		return playerSkills;
 	}
 	
 	private void setPlayerHumnityS( CallType type, ref ParamsReadContext ctx, ref PlayerIdentity sender, ref Object target )
@@ -45,12 +15,19 @@ class PlayerMonitorBack
         if( type == CallType.Server ) {	
 			string playerID = sender.GetId();
 			
-			PlayerMonitorHumanityValues playerHumanityData = loadPlayerData(playerID);
+			int humanity = 0;
+			string humanityLevel = "None";
+			string killedPlayers = "None";
+			string killedZombies = "None";
 			
-			int humanity = playerHumanityData.getHumanity();
-			string humanityLevel = playerHumanityData.getHumanityLevel();
-			string killedPlayers = playerHumanityData.getKilledPlayers().ToString();
-			string killedZombies = playerHumanityData.getKilledZeds().ToString();
+			#ifdef FALCON_HEROES
+				PlayerHumanityValues playerHumanityData = FalconHeroesLogger.loadPlayerHumanityData(playerID);
+				
+				humanity = playerHumanityData.getHumanity();
+				humanityLevel = playerHumanityData.getHumanityLevel();
+				killedPlayers = playerHumanityData.getKilledPlayers().ToString();
+				killedZombies = playerHumanityData.getKilledZeds().ToString();
+			#endif
 			
 			PlayerHumanityPackage playerHumnityPackage = new PlayerHumanityPackage(humanity, humanityLevel, killedPlayers, killedZombies);
 			
@@ -68,11 +45,20 @@ class PlayerMonitorBack
 		
         if ( !ctx.Read( data ) ) return;
         
-        if( type == CallType.Server ) {	
+        if( type == CallType.Server ) {
+			
+			// Define in FalconSkills defines doesnt work dunno why...
+			#ifndef FALCON_SKILLS
+				#define FALCON_SKILLS
+			#endif
+				
 			string playerID = sender.GetId();
 			
 			array<string> playerSkillsData = new array<string>();
-			playerSkillsData = loadPlayerSkillsData(playerID);
+			
+			#ifdef FALCON_SKILLS
+				playerSkillsData = FalconSkillsLogger.loadPlayerSkillData(playerID);
+			#endif
 			
 			GetRPCManager().SendRPC( "FalconMonitor", "setPlayerSkillsC", new Param1<array<string>>(playerSkillsData), true, sender );
        	 }

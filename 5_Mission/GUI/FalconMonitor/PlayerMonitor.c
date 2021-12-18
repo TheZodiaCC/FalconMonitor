@@ -12,12 +12,7 @@ class PlayerMonitor extends UIScriptedMenu
 	private TextWidget JournalMainText;
 	
 	private Widget SkillsWidget;
-	private TextWidget MechanicSkillTitleText;
-	private TextWidget MechanicSkillText;
-	private TextWidget MedicalSkillTitleText;
-	private TextWidget MedicalSkillText;
-	private TextWidget BuildingSkillTitleText;
-	private TextWidget BuildingSkillText;
+	private TextListboxWidget SkillsLIST;
 	
 	private Widget HumanityWidget;	
 	private TextWidget HumanityCountText;
@@ -73,9 +68,7 @@ class PlayerMonitor extends UIScriptedMenu
 			JournalMainText = TextWidget.Cast(widgetRoot.FindAnyWidget("JournalTitleTEXT"));
 			
 			SkillsWidget = Widget.Cast(widgetRoot.FindAnyWidget("SkillsPanel"));
-			MechanicSkillText = TextWidget.Cast(widgetRoot.FindAnyWidget("MechanicSkillText"));
-			MedicalSkillText = TextWidget.Cast(widgetRoot.FindAnyWidget("MedicalSkillText"));
-			BuildingSkillText = TextWidget.Cast(widgetRoot.FindAnyWidget("BuildingSkillText"));
+			SkillsLIST = TextListboxWidget.Cast(widgetRoot.FindAnyWidget("SkillsLIST"));
 			
 			btnHumanityPanel = ButtonWidget.Cast(widgetRoot.FindAnyWidget("HumanityButtonWidget")); 
 			btnSkillsPanel = ButtonWidget.Cast(widgetRoot.FindAnyWidget("SkillsButtonWidget"));
@@ -162,86 +155,12 @@ class PlayerMonitor extends UIScriptedMenu
 				array<string> skills = new array<string>();
 				skills = data.param1;
 				
-				int length = skills.Count();
+				SkillsLIST.ClearItems();
 				
-				array<string> mechanicSkills = new array<string>();
-				array<string> medicalSkills = new array<string>();
-				array<string> buildingSkills = new array<string>();
-				
-				for (int i = 0; i < length; i++){
-					if (skills.Get(i).IndexOf("Mechanic") != -1)
-					{
-						mechanicSkills.Insert(skills.Get(i));
-					}
-					
-					if (skills.Get(i).IndexOf("Medical") != -1)
-					{
-						medicalSkills.Insert(skills.Get(i));
-					}
-					
-					if (skills.Get(i).IndexOf("Building") != -1)
-					{
-						buildingSkills.Insert(skills.Get(i));
-					}
-				}
-				
-				switch(mechanicSkills.Count())
+				for (int i = 0; i < skills.Count(); i++)
 				{
-					case 0:
-						MechanicSkillText.SetText("Untaught");
-						break;
-					case 1:
-						MechanicSkillText.SetText("Beginner");
-						break;
-					case 2:
-						MechanicSkillText.SetText("Intermediate");
-						break;
-					case 3:
-						MechanicSkillText.SetText("Advanced");
-						break;
-					default:
-						break;
-				
+					SkillsLIST.AddItem(skills[i], NULL, 0);
 				}
-				
-				switch(medicalSkills.Count())
-				{
-					case 0:
-						MedicalSkillText.SetText("Untaught");
-						break;
-					case 1:
-						MedicalSkillText.SetText("Beginner");
-						break;
-					case 2:
-						MedicalSkillText.SetText("Intermediate");
-						break;
-					case 3:
-						MedicalSkillText.SetText("Advanced");
-						break;
-					default:
-						break;
-				
-				}
-				
-				switch(buildingSkills.Count())
-				{
-					case 0:
-						BuildingSkillText.SetText("Untaught");
-						break;
-					case 1:
-						BuildingSkillText.SetText("Beginner");
-						break;
-					case 2:
-						BuildingSkillText.SetText("Intermediate");
-						break;
-					case 3:
-						BuildingSkillText.SetText("Advanced");
-						break;
-					default:
-						break;
-				
-				}
-			
 			}
 		}
 	}
