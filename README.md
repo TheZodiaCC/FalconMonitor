@@ -13,3 +13,7 @@ Mod provides monitor for displaying player specified data.
 
 ### Key Bindings
 - `M` Turn On/Off player Monitor
+
+### Media
+![MONITOR](/media/pm1.png)
+![MONITOR](/media/pm2.png)
